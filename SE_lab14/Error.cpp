@@ -1,26 +1,28 @@
 #include "stdafx.h"
 #include "Error.h"
+
 namespace Error
 {
-    // серии ошибок:   0 -  99 - системные ошибки
-    //               100 - 109 - ошибки параметров
-    //               110 - 119 - ошибки открытия и чтения файлов
-    ERROR errors[ERROR_MAX_ENTRY] =  // таблица ошибок
+    // СЃРµСЂРёРё РѕС€РёР±РѕРє:
+    //   0  -  99   - СЃРёСЃС‚РµРјРЅС‹Рµ РѕС€РёР±РєРё
+    //   100 - 109  - РѕС€РёР±РєРё РїР°СЂР°РјРµС‚СЂРѕРІ
+    //   110 - 119  - РѕС€РёР±РєРё РѕС‚РєСЂС‹С‚РёСЏ Рё С‡С‚РµРЅРёСЏ С„Р°Р№Р»РѕРІ
+    ERROR errors[ERROR_MAX_ENTRY] =  // С‚Р°Р±Р»РёС†Р° РѕС€РёР±РѕРє
     {
-      ERROR_ENTRY(0, "недопустимый код ошибки"),   // код ошибки вне диапазона 0 - ERROR_MAX_ENTRY
-      ERROR_ENTRY(1, "Системный сбой"),
+      ERROR_ENTRY(0, "РќРµРґРѕРїСѓСЃС‚РёРјС‹Р№ РєРѕРґ РѕС€РёР±РєРё"),   // РєРѕРґ РѕС€РёР±РєРё РІРЅРµ РґРёР°РїР°Р·РѕРЅР° 0 - ERROR_MAX_ENTRY
+      ERROR_ENTRY(1, "РЎРёСЃС‚РµРјРЅС‹Р№ СЃР±РѕР№"),
       ERROR_ENTRY_NODEF(2), ERROR_ENTRY_NODEF(3), ERROR_ENTRY_NODEF(4), ERROR_ENTRY_NODEF(5),
       ERROR_ENTRY_NODEF(6), ERROR_ENTRY_NODEF(7), ERROR_ENTRY_NODEF(8), ERROR_ENTRY_NODEF(9),
       ERROR_ENTRY_NODEF10(10), ERROR_ENTRY_NODEF10(20), ERROR_ENTRY_NODEF10(30), ERROR_ENTRY_NODEF10(40), ERROR_ENTRY_NODEF10(50),
       ERROR_ENTRY_NODEF10(60), ERROR_ENTRY_NODEF10(70), ERROR_ENTRY_NODEF10(80), ERROR_ENTRY_NODEF10(90),
-      ERROR_ENTRY(100, "Параметр -in должен быть задан"),
+      ERROR_ENTRY(100, "РџР°СЂР°РјРµС‚СЂ -in РґРѕР»Р¶РµРЅ Р±С‹С‚СЊ Р·Р°РґР°РЅ"),
       ERROR_ENTRY_NODEF(101), ERROR_ENTRY_NODEF(102), ERROR_ENTRY_NODEF(103),
-      ERROR_ENTRY(104, "Превышена длина входного файла"),
+      ERROR_ENTRY(104, "РџСЂРµРІС‹С€РµРЅР° РґР»РёРЅР° РІС…РѕРґРЅРѕРіРѕ С„Р°Р№Р»Р°"),
       ERROR_ENTRY_NODEF(105), ERROR_ENTRY_NODEF(106), ERROR_ENTRY_NODEF(107),
       ERROR_ENTRY_NODEF(108), ERROR_ENTRY_NODEF(109),
-      ERROR_ENTRY(110, "Ошибка при открытии файла с исходным кодом (-in)"),
-      ERROR_ENTRY(111, "Недопустимый символ в исходном файле (-in)"),
-      ERROR_ENTRY(112, "Ошибка при создании файла протокола (-log)"),
+      ERROR_ENTRY(110, "РћС€РёР±РєР° РїСЂРё РѕС‚РєСЂС‹С‚РёРё С„Р°Р№Р»Р° СЃ РёСЃС…РѕРґРЅС‹Рј РєРѕРґРѕРј (-in)"),
+      ERROR_ENTRY(111, "РќРµРґРѕРїСѓСЃС‚РёРјС‹Р№ СЃРёРјРІРѕР» РІ РёСЃС…РѕРґРЅРѕРј С„Р°Р№Р»Рµ (-in)"),
+      ERROR_ENTRY(112, "РћС€РёР±РєР° РїСЂРё СЃРѕР·РґР°РЅРёРё С„Р°Р№Р»Р° РїСЂРѕС‚РѕРєРѕР»Р° (-log)"),
       ERROR_ENTRY_NODEF(113), ERROR_ENTRY_NODEF(114), ERROR_ENTRY_NODEF(115),
       ERROR_ENTRY_NODEF(116), ERROR_ENTRY_NODEF(117), ERROR_ENTRY_NODEF(118), ERROR_ENTRY_NODEF(119),
       ERROR_ENTRY_NODEF10(120), ERROR_ENTRY_NODEF10(130), ERROR_ENTRY_NODEF10(140), ERROR_ENTRY_NODEF10(150),
@@ -28,6 +30,7 @@ namespace Error
       ERROR_ENTRY_NODEF100(200), ERROR_ENTRY_NODEF100(300), ERROR_ENTRY_NODEF100(400), ERROR_ENTRY_NODEF100(500),
       ERROR_ENTRY_NODEF100(600), ERROR_ENTRY_NODEF100(700), ERROR_ENTRY_NODEF100(800), ERROR_ENTRY_NODEF100(900)
     };
+
     ERROR geterror(int id) {
         ERROR er;
         if (id <= 0  || id >= ERROR_MAX_ENTRY)
@@ -38,13 +41,12 @@ namespace Error
         {
             er = errors[id];
         }
-
         return er;
     }
+
     ERROR geterrorin(int id, int line = -1, int col = 0)
     {
         ERROR er;
-
         if (id <= 0  || id >= ERROR_MAX_ENTRY)
         {
             er = errors[0];
@@ -53,10 +55,8 @@ namespace Error
         {
             er = errors[id];
         }
-
         er.inext.col = col;
         er.inext.line = line;
-
         return er;
     }
 }
