@@ -1,34 +1,34 @@
-#include"stdafx.h"
-#include"Error.h"
-#include"Parm.h"
-#include"Log.h"
-#include"In.h"
+#include "stdafx.h"
+#include "Error.h"
+#include "Parm.h"
+#include "Log.h"
+#include "In.h"
 
 int _tmain(int argc, _TCHAR* argv[]) {
 
     setlocale(LC_ALL, "rus");
 
-    std::cout << "---- òåñò Parm::getparm ---" << std::endl << std::endl;
+    std::cout << "---- Ñ‚ÐµÑÑ‚ Parm::getparm ---" << std::endl << std::endl;
     try {
         Parm::PARM parm = Parm::getparm(argc, argv);
 
         wcout << "-in: " << parm.in << ", -out: " << parm.out << ", -log: " << parm.log << endl << endl;
     }
     catch (Error::ERROR e) {
-        cout << "Îøèáêà " << e.id << ":" << e.message << endl << endl;
+        cout << "ÐžÑˆÐ¸Ð±ÐºÐ° " << e.id << ": " << e.message << endl << endl;
     };
 
-    std::cout << "---- òåñò In::getin ---" << std::endl << std::endl;
+    std::cout << "---- Ñ‚ÐµÑÑ‚ In::getin ---" << std::endl << std::endl;
     try {
         Parm::PARM parm = Parm::getparm(argc, argv);
         In::IN in = In::getin(parm.in);
         cout << in.text << endl;
-        cout << "Âñåãî ñèìâîëîâ: " << in.size << endl;
-        cout << "Âñåãî ñòðîê: " << in.lines << endl;
-        cout << "Ïðîïóùåíî: " << in.ignore << endl;
+        cout << "Ð’ÑÐµÐ³Ð¾ ÑÐ¸Ð¼Ð²Ð¾Ð»Ð¾Ð²: " << in.size << endl;
+        cout << "Ð’ÑÐµÐ³Ð¾ ÑÑ‚Ñ€Ð¾Ðº: " << in.lines << endl;
+        cout << "ÐŸÑ€Ð¾Ð¿ÑƒÑ‰ÐµÐ½Ð¾: " << in.ignore << endl;
     }
     catch (Error::ERROR e) {
-        cout << "Îøèáêà " << e.id << ":" << e.message << endl;
+        cout << "ÐžÑˆÐ¸Ð±ÐºÐ° " << e.id << ": " << e.message << endl;
     }
 
     Log::LOG log;
@@ -36,8 +36,8 @@ int _tmain(int argc, _TCHAR* argv[]) {
     {
         Parm::PARM parm = Parm::getparm(argc, argv);
         log = Log::getlog(parm.log);
-        Log::WriteLine(log, (char*)"Òåñò:", (char*)" áåç îøèáîê\n", "");
-        Log::WriteLine(log, (char*)"Òåñò:", (char*)" áåç îøèáîê\n", "");
+        Log::WriteLine(log, (char*)"Ð¢ÐµÑÑ‚:", (char*)" Ð±ÐµÐ· Ð¾ÑˆÐ¸Ð±Ð¾Ðº\n", "");
+        Log::WriteLine(log, (char*)"Ð¢ÐµÑÑ‚:", (char*)" Ð±ÐµÐ· Ð¾ÑˆÐ¸Ð±Ð¾Ðº\n", "");
         Log::WriteLog(log);
         Log::WriteParm(log, parm);
         In::IN in = In::getin(parm.in);
